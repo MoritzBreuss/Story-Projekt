@@ -1,0 +1,35 @@
+/* style.css */
+
+/* Setze den Hintergrund */
+body {
+    background: url('picture1/backround.png') no-repeat center center fixed; /* Hintergrundbild */
+    background-size: cover; /* Hintergrundbild auf Bildschirmgröße skalieren */
+    margin: 0;
+    font-family: 'Arial', sans-serif; /* Klare, lesbare Schriftart */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Text unten anzeigen */
+    height: 100vh;
+    color: #ffffff; /* Weiße Schriftfarbe */
+}
+
+h1 {
+    display: none; /* Überschrift ausblenden, falls sie nicht benötigt wird */
+}
+
+div {
+    background: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund für den Textbereich */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px; /* Abgerundete Ecken */
+    width: 90%; /* Breite des Textbereichs */
+    max-width: 800px; /* Maximale Breite */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#text {
+    font-size: 1.5em; /* Schriftgröße */
+    margin: 0;
+}
