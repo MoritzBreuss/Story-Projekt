@@ -1,7 +1,8 @@
 /* Stylesheet für die Startseite des Visual Novel Spiels */
 body {
-    background: linear-gradient(45deg, #121212, #7c3214, #121212);
-        color: #ffffff; /* Helle Schriftfarbe für guten Kontrast */
+    background: linear-gradient(45deg, #121212, #1e90ff, #121212); /* Farbverlauf für den Hintergrund */
+    background-size: 400% 400%;
+    color: #ffffff; /* Helle Schriftfarbe für guten Kontrast */
     font-family: 'Arial', sans-serif; /* Klare, lesbare Schriftart */
     display: flex;
     flex-direction: column;
@@ -9,6 +10,13 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
+    animation: backgroundFade 10s ease infinite; /* Animation des Hintergrunds */
+}
+
+@keyframes backgroundFade {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 h1 {
