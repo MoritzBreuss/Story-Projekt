@@ -1,0 +1,37 @@
+/* Stylesheet für die Startseite des Visual Novel Spiels */
+body {
+    background: linear-gradient(45deg, #121212, #7c3214, #121212);
+        color: #ffffff; /* Helle Schriftfarbe für guten Kontrast */
+    font-family: 'Arial', sans-serif; /* Klare, lesbare Schriftart */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #1e90ff; /* Helles Blau für die Buttons */
+    color: #ffffff; /* Weiße Schriftfarbe auf den Buttons */
+    border: none;
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px; /* Runde Ecken für die Buttons */
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1c86ee; /* Etwas dunkleres Blau beim Hover-Effekt */
+}
+
+button:active {
+    background-color: #187bcd; /* Noch dunkleres Blau beim Klick */
+}
