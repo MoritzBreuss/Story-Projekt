@@ -1,8 +1,9 @@
 /* style.css */
 
-/* Setze den Hintergrund */
 body {
-    background: url('picture1/backround.png') no-repeat center center fixed; /* Hintergrundbild */
+    background: url('picture1/backround.png') no-repeat center center fixed;
+    -webkit-transition: background-image 5s; /* Add transition effect for the background image */
+    transition: background-image 5s; /* Ensure compatibility with all browsers */
     background-size: cover; /* Hintergrundbild auf Bildschirmgröße skalieren */
     margin: 0;
     font-family: 'Arial', sans-serif; /* Klare, lesbare Schriftart */
@@ -16,20 +17,32 @@ body {
 h1 {
     display: none; /* Überschrift ausblenden, falls sie nicht benötigt wird */
 }
-
-div {
-    background: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund für den Textbereich */
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px; /* Abgerundete Ecken */
-    width: 90%; /* Breite des Textbereichs */
-    max-width: 800px; /* Maximale Breite */
-    margin-left: auto;
-    margin-right: auto;
+#text-container {
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for text area */
+    padding: 50px;
+    border-radius: 10px; /* Rounded corners */
+    width: 80%; /* Width of text area */
+    max-width: 800px; /* Max width */
+    margin: 35px auto; /* Center horizontally */
     text-align: center;
+    position: relative;
+    z-index: 10; /* Ensure text is above overlay */
 }
 
 #text {
-    font-size: 1.5em; /* Schriftgröße */
+    font-size: 2em; /* Font size */
     margin: 0;
+    font-family: 'Crimson Text', serif; /* Apply Crimson Text font */
+    
+}
+
+/* Additional styles for better presentation */
+@media (max-width: 600px) {
+    #text-container {
+        width: 90%; /* Adjust width for smaller screens */
+        padding: 20px;
+    }
+    #text {
+        font-size: 1.2em; /* Adjust font size for smaller screens */
+    }
 }

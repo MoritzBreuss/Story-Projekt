@@ -3,41 +3,43 @@ let textArray = [
     "das ist der zweite test",
     "img",
     "das ist der dritte test",
-    "das ist der vierte test",
+    "das ist der vierte testttttttttttt tttttttttttttttt tttttttttttttttttttttttt ttttttttttttttttttttttttttttttttttttttttttt",
 ]
 let textStelle = 0;
 let bildStelle = 0;
 
 function Spielzug() {
-    if (ifImg()) {
-        // Wenn ein Bild angezeigt wird, überspringe den Text und zeige das Bild an.
-        textStelle++;
-        setTimeout(Spielzug, 3000); // Nach 3 Sekunden zum nächsten Text wechseln
+    if (textArray[textStelle] === "img") {
+       nextBild();
     } else {
         nextText();
-        textStelle++;
+
+    }
+
+    
+    if (textStelle >= textArray.length+1){
+        console.log("ende von text")
+        
     }
 }
 
-function ifImg() {
-    if (textArray[textStelle] === "img") {
-        document.body.style.backgroundImage = "url('picture1/img" + bildStelle + ".jpg')";
+function nextBild (){
+    document.body.style.backgroundImage = "url('picture1/img" + bildStelle + ".jpg')";
         bildStelle++;
-        console.log(bildStelle + " success");
-        return true;
-    }
-    return false;
+        textStelle++;
+        console.log(bildStelle + "Bild changing success");
+        Spielzug();
 }
+
     function nextText() {
         document.getElementById("text").innerHTML = textArray[textStelle];
         textStelle++;
-
+       
     }
     
 
 onkeydown = function (event) {
     if (event.code === "Space") {
-        nextText();
-        textStelle++;   
+        Spielzug();
     }
 }
