@@ -24,7 +24,7 @@ h1 {
     width: 80%; /* Width of text area */
     max-width: 800px; /* Max width */
     margin: 35px auto; /* Center horizontally */
-    text-align: center;
+    text-align: left;
     position: relative;
     z-index: 10; /* Ensure text is above overlay */
 }

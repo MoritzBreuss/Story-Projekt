@@ -1,3 +1,5 @@
+let textAnzeige = document.getElementById("text").innerHTML;
+let isTyping = false;
 let textArray = [
     "Hi bbg das ist ein test",
     "das ist der zweite test",
@@ -13,11 +15,10 @@ function Spielzug() {
        nextBild();
     } else {
         nextText();
-
+        textStelle++;
     }
 
-    
-    if (textStelle >= textArray.length+1){
+    if (textStelle >= textArray.length){
         console.log("ende von text")
         
     }
@@ -32,14 +33,34 @@ function nextBild (){
 }
 
     function nextText() {
-        document.getElementById("text").innerHTML = textArray[textStelle];
-        textStelle++;
+        document.getElementById("text").innerHTML = "";
+        let text = textArray[textStelle];
+        let i = 0;
+        isTyping = true;
+
+       function smoothTextAnzeige(){
+       if (i < text.length && isTyping) {
+            document.getElementById("text").innerHTML += text.charAt(i);
+            setTimeout(smoothTextAnzeige, 70);
+            i++;
+        } else {
+            isTyping = false;
+        }
+    }
+
+       smoothTextAnzeige();
        
     }
     
 
+
 onkeydown = function (event) {
     if (event.code === "Space") {
-        Spielzug();
+        if(isTyping){
+            document.getElementById("text").innerHTML = textArray[textStelle - 1];
+            isTyping = false;
+        } else {
+            Spielzug();
+        }
     }
 }
