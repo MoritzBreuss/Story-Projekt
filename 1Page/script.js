@@ -19,9 +19,7 @@ function Spielzug() {
     }
 
     if (textStelle >= textArray.length){
-        console.log("ende von text")
-        
-    }
+        console.log("ende von text")}
 }
 
 function nextBild (){
