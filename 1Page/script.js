@@ -66,45 +66,41 @@ onkeydown = function (event) {
 }
 
 
-if (localStorage.getItem("dark-mode") === "true") {                 //Settet den Darkmode und Fontsize beim Start, auch ohne localStorage change
-    console.log("darkmode");
-    var element = document.body;
-    element.classList.add("dark-mode");
-    document.getElementById("text-container").classList.add("dark-mode");
-} else {
-    console.log("hellmode");
-    var element = document.body;                
-    element.classList.remove("dark-mode");
-    document.getElementById("text-container").classList.remove("dark-mode");
+
+function changeDarkmode () {
+    if (localStorage.getItem("dark-mode") === "true") {                 //Settet den Darkmode und Fontsize beim Start, auch ohne localStorage change
+        console.log("darkmode");
+        var element = document.body;
+        element.classList.add("dark-mode");
+        document.getElementById("text-container").classList.add("dark-mode");
+    } else {
+        console.log("hellmode");
+        var element = document.body;                
+        element.classList.remove("dark-mode");
+        document.getElementById("text-container").classList.remove("dark-mode");
+    }
 }
+changeDarkmode();                                           //Darkmode Einstellen beim Start
 
-let fontSize = localStorage.getItem('fontSize');            //Fontsize Einstellen beim Start
-document.getElementById("text-container").style.fontSize = fontSize + "px";
-
-
-
-window.addEventListener('storage', (event) => {     //wird direkt ausgeführt wenn sich der Localstorage ändert
-    if ( event.key == "fontSize") {                 //Fontsize Einstellen mit Localstorage
-
-        let fontSize = localStorage.getItem('fontSize');
+function changeFontSize() {
+    let fontSize = localStorage.getItem('fontSize');
         if (fontSize) {
-            document.getElementById("text-container").style.fontSize = fontSize + "px";         
+            document.getElementById("text-container").style.fontSize = fontSize + "px";
+            console.log("Fontsize changed");   
         }
+}
+changeFontSize();                                           //Fontsize Einstellen beim Start
 
-    }
 
+
+
+window.addEventListener('storage', (event) => {     //wird direkt ausgeführt wenn sich der Localstorage ändert für Fontsize und Darkmode
+    if ( event.key == "fontSize") {                 //Fontsize Einstellen mit Localstorage
+      changeFontSize();        
+        }
     if (event.key == "dark-mode") {                 //Für Darkmode Einstellungen
-        if (localStorage.getItem("dark-mode") === "true") {
-            console.log("darkmode");
-            var element = document.body;
-            element.classList.add("dark-mode");
-            document.getElementById("text-container").classList.add("dark-mode");
-        } else {
-            console.log("hellmode");
-            var element = document.body;
-            element.classList.remove("dark-mode");
-            document.getElementById("text-container").classList.remove("dark-mode");
-        }
-    }
-})
+       changeDarkmode();
+        
+    }});
+
 
