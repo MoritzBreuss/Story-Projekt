@@ -6,13 +6,31 @@ let textArray = [
     "img",
     "das ist der dritte test",
     "das ist der vierte testttttttttttt tttttttttttttttt tttttttttttttttttttttttt ttttttttttttttttttttttttttttttttttttttttttt",
+    "opt"
 ]
+let text1A = [
+    "Oh... ich dachte nicht das du so nett zu mir seien würdest",
+    "Du schaust immer so schlecht drauf aus, was nichts dran ändert das du auch gut Ausschaust",
+    "Sehr gut sogar",
+    "Ich bin froh das ich dich getroffen habe",
+    "Ich hoffe wir können uns noch öfter sehen",
+]
+let text1B = [
+    "Was meine Mutter?",
+    "Soll ich dich küssen??!, Soll ich dich küssen??!",
+    "Ja pass lieber auf wo du hintrittst",
+    "Sonst schieb ich noch meinen Lörres in dein Gesicht",]
 let textStelle = 0;
 let bildStelle = 0;
+let optionenStelle = 0;
 
 function Spielzug() {
     if (textArray[textStelle] === "img") {
        nextBild();
+       
+    } else if (textArray[textStelle] === "opt") {
+       optionenErstellen();
+
     } else {
         nextText();
         textStelle++;
@@ -30,13 +48,46 @@ function nextBild (){
         Spielzug();
 }
 
-    function nextText() {
+function optionenErstellen(){       //Hidet den textcontainer und zeigt die Optionen an, je nachdem welche OptionenStelle gerade ist
+    console.log("Optionen fuktion gestartet");
+    let textContainer = document.getElementById("text-container");
+    textContainer.style.display = "none";
+
+    if (optionenStelle === 0) {         //Optionen für die Erste Option              
+       let optionenContainer = document.getElementById("optionen-container");
+       optionenContainer.innerHTML = `
+       <button id="optionA" onclick='optionenHantieren("A")' > ihn</button>
+        <button id="optionB" onclick='optionenHantieren("B")' >Spuck im</button>
+       `;
+    }
+}
+
+function optionenHantieren(option) {            //Pusht den Optionen Array in den TextArray entsprechend der Option die bei dem buttononclick übergeben wird. Dann cleared sie den optionen-container und zeigt den Textcontainer wieder an, dann kriegen optionen, textstelle ++ und Spielzug wird aufgerufen
+    if (option == "A"){                        
+       textArray = textArray.concat(text1A);
+        console.log("in den Array erfolgreich eingefügt" + textArray);
+    } else if (option == "B"){
+       textArray = textArray.concat(text1B);
+        console.log("in den Array erfolgreich eingefügt" + textArray);
+    }
+
+    document.getElementById("optionen-container").innerHTML = "";
+    let textContainer = document.getElementById("text-container");
+    textContainer.style.display = "block";
+    
+    textStelle++;
+    optionenStelle++;
+    Spielzug();
+}
+
+
+    function nextText() {       //macht isTyping true und fängt an den Text zu schreiben
         document.getElementById("text").innerHTML = "";
         let text = textArray[textStelle];
         let i = 0;
         isTyping = true;
 
-       function smoothTextAnzeige(){
+       function smoothTextAnzeige(){ //Funktion für die Animation des Textes, checkes ob Istyping true ist und sobald es fertig ist macht es isTyping false
        if (i < text.length && isTyping) {
             document.getElementById("text").innerHTML += text.charAt(i);
             setTimeout(smoothTextAnzeige, 70);
@@ -45,14 +96,12 @@ function nextBild (){
             isTyping = false;
         }
     }
-
        smoothTextAnzeige();
-       
     }
     
 
 
-onkeydown = function (event) {
+onkeydown = function (event) {          //startet Spielzug wenn Space gedrückt wird abhängig davon ob isTyping true ist oder nicht
     if (event.code === "Space") {
         if(isTyping){
             document.getElementById("text").innerHTML = textArray[textStelle - 1];
@@ -88,8 +137,6 @@ function changeFontSize() {
         }
 }
 changeFontSize();                                           //Fontsize Einstellen beim Start
-
-
 
 
 window.addEventListener('storage', (event) => {     //wird direkt ausgeführt wenn sich der Localstorage ändert für Fontsize und Darkmode
