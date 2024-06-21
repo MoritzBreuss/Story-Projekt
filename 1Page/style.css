@@ -11,7 +11,8 @@ body {
     flex-direction: column;
     justify-content: flex-end; /* Text unten anzeigen */
     height: 100vh;
-    color: #ffffff; /* Weiße Schriftfarbe */
+    background-color: white;
+    color: rgb(255, 255, 255);
 }
 
 h1 {
@@ -46,3 +47,14 @@ h1 {
         font-size: 1.2em; /* Adjust font size for smaller screens */
     }
 }
+
+.dark-mode {
+    background-color: black;       /*für Darkmode*/
+    color: white;
+  }
+
+  #text-container.dark-mode {
+    background: rgba(255, 255, 255, 0.5);
+}
+  
+    

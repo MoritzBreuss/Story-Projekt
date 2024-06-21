@@ -1,5 +1,5 @@
-let textAnzeige = document.getElementById("text").innerHTML;
-let isTyping = false;
+let textAnzeige = document.getElementById("text").innerHTML;   
+let isTyping = false;   //für Animation des Textes
 let textArray = [
     "Hi bbg das ist ein test",
     "das ist der zweite test",
@@ -64,3 +64,29 @@ onkeydown = function (event) {
         }
     }
 }
+
+window.addEventListener('storage', (event) => {     //wird direkt ausgeführt wenn sich der Localstorage ändert
+    if ( event.key == "fontSize") {
+
+        let fontSize = localStorage.getItem('fontSize');
+        if (fontSize) {
+            document.getElementById("text-container").style.fontSize = fontSize + "px";         //Fontsize Einstellen mit Localstorage
+        }
+
+    }
+
+    if (event.key == "dark-mode") {
+        if (localStorage.getItem("dark-mode") === "true") {
+            console.log("darkmode");
+            var element = document.body;
+            element.classList.add("dark-mode");
+            document.getElementById("text-container").classList.add("dark-mode");
+        } else {
+            console.log("hellmode");
+            var element = document.body;
+            element.classList.remove("dark-mode");
+            document.getElementById("text-container").classList.remove("dark-mode");
+        }
+    }
+})
+

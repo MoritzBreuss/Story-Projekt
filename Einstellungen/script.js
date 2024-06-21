@@ -11,14 +11,17 @@ modeToggle.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
     if (body.classList.contains('dark-mode')) {
         modeToggle.textContent = 'Light Mode';
+        localStorage.setItem("dark-mode", "true")
     } else {
         modeToggle.textContent = 'Dark Mode';
+        localStorage.setItem("dark-mode", "false")
     }
 });
 
 function changeFontSize() {
     var fontSizeInput = document.getElementById('fontSize');
     var fontSize = parseInt(fontSizeInput.value, 10);
+    localStorage.setItem('fontSize', fontSize);
     var elements = document.getElementsByClassName('text');
     var minFontSize = parseInt(fontSizeInput.min, 10);
     var maxFontSize = parseInt(fontSizeInput.max, 10);
