@@ -13,6 +13,7 @@ body {
     height: 100vh;
     background-color: white;
     color: rgb(255, 255, 255);
+    opacity: 100%;
 }
 
 h1 {
@@ -45,8 +46,18 @@ h1 {
     }
     #text {
         font-size: 1.2em; /* Adjust font size for smaller screens */
+    }.speicherstaende {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
     }
 }
+@media (min-width: 601px) and (max-width: 900px) {
+    .speicherstaende {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(auto-fill, 1fr);
+    }
+}
+
 
 .dark-mode {
     background-color: black;       /*für Darkmode*/
@@ -122,4 +133,62 @@ h1 {
 .fade-container::after {
     right: 0;
     background: linear-gradient(to left, #100707, transparent);
+}
+
+#menu-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: rgb(204, 255, 0);
+    width: 100%;
+    height: 100%;
+    top:0px;
+    left:0px;
+    z-index: -1000;
+    
+    opacity: 0%
+
+}
+
+.speicherstaende-container {
+    max-width: 800px;
+    margin: 20px auto 200px auto;
+    padding: 20px;
+    background-color: #34495e;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+   
+}
+.speicherstaende {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 20px;
+    
+}
+.speicherstaende .slot {
+    background-color: #1abc9c;
+    border: 3px solid #16a085;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+}
+.speicherstaende .slot:hover {
+    background-color: #16a085;
+    border-color: #1abc9c;
+    transform: translateY(-5px);
+}
+.slot-number {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+.slot-date {
+    color: #ecf0f1;
+    font-size: 0.9em;
 }

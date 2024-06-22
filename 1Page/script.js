@@ -1,5 +1,6 @@
 let textAnzeige = document.getElementById("text").innerHTML;   
 let isTyping = false;   //für Animation des Textes
+let menuOpen = false;   //für das Menü
 let textArray = [
     "Hi bbg das ist ein test",
     "das ist der zweite test",
@@ -99,6 +100,16 @@ function optionenHantieren(option) {            //Pusht den Optionen Array in de
        smoothTextAnzeige();
     }
     
+    function menu() {   //Funktion für das Menü, wird noch gemacht nichts verändern hier
+
+        let menudiv = document.getElementById("menu-div");
+        menudiv.style.opacity = "50%";
+        menudiv.style.zIndex = 1000;
+
+
+    } 
+
+menu();
 
 
 onkeydown = function (event) {          //startet Spielzug wenn Space gedrückt wird abhängig davon ob isTyping true ist oder nicht
