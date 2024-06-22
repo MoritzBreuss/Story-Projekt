@@ -1,3 +1,3 @@
-# Story-Projekt
+# Html-Javascript Visual Novel game from Scratch
 
-Hallo
+Brauchen nochimmer eine gute Story idee 
