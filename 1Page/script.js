@@ -3,6 +3,7 @@ let isTyping = false; //für Animation des Textes
 let menuOpen = false; //für das Menü
 let changingSlotName = false; //für das umbenennen des Speicherstandes
 let willSlotUmbenennen = false; //für das umbenennen des Speicherstandes
+let willSpeicherstandLaden = false; //für das Laden des Speicherstandes
 let textArray = [
   "Hi bbg das ist ein test",
   "das ist der zweite test",
@@ -196,6 +197,27 @@ function closeMenu() {
   insidemenu.style.zIndex = -5;
 }
 
+function willSpeicherstandLadenFunc() {
+  willSpeicherstandLaden = !willSpeicherstandLaden;
+  speicherStandLadenAnimation();
+    
+}
+
+function speicherStandLadenAnimation () {
+  const buttons = document.querySelectorAll('.slot');
+  if (willSpeicherstandLaden) {
+    buttons.forEach(button => {
+        console.log('Adding bounce to:', button);
+        button.classList.add('bounce');
+    });
+} else if (!willSpeicherstandLaden || button.classList.contains('bounce')){
+    buttons.forEach(button => {
+        console.log('Removing bounce from:', button);
+        button.classList.remove('bounce');
+    });
+}
+}
+
 function slotButtonClicked(event) {
   if (!changingSlotName) {
     let element = event.target;
@@ -205,17 +227,30 @@ function slotButtonClicked(event) {
     // If we found an element with a class of 'slot', log its id
     if (element) {
       console.log("slot button: " + element.id + " clicked");
-        if (willSlotUmbenennen) {
+
+        if (willSlotUmbenennen) {     //Für das Umbenennen des Speicherstandes
       changingSlotName = true;
       speicherstandUmbenennen(element);
-    } else {
+
+    }  else if (!willSpeicherstandLaden && !willSlotUmbenennen) {     //Für das Speichern des Speicherstandes
         changingSlotName = true;
         speicherstandUmbenennen(element);
         speicherstandSpeichern(element);
-  }}}
+
+  } if (willSpeicherstandLaden) {       //Für das Laden des Speicherstandes
+    console.log("Speicherstand wird geladen");
+    speicherStandLaden();
+    willSpeicherstandLaden = false;
+    speicherStandLadenAnimation();
+      //sdsdd
+  }
+}}
 }
   
+function speicherStandLaden(){
 
+  
+}
 
 function speicherstandSpeichern(element) {      //Ändert den SpeicherstandArray im localstorage, In porgress
     let speicherstandArray = JSON.parse(localStorage.getItem("SpeicherstandArray"));
@@ -228,6 +263,7 @@ function speicherstandSpeichern(element) {      //Ändert den SpeicherstandArray
         speicherOptionenStelle: optionenStelle,
         speicherTextArray: textArray,
     }
+    console.log(speicherstand +"wurde gespeichert");
     speicherstandArray.push(speicherstand);
     localStorage.setItem("SpeicherstandArray", JSON.stringify(speicherstandArray));
 }
