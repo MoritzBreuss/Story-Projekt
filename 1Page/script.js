@@ -29,6 +29,16 @@ let textStelle = 0;
 let bildStelle = 0;
 let optionenStelle = 0;
 
+function starteSpielHinweisText() {
+  let text = document.getElementById("spielStartHinweis")
+  if (textStelle === 0) {
+    text.innerHTML = 'Drücke "Space" zum starten...'
+  } else {
+    text.innerHTML = ""
+  }
+}
+starteSpielHinweisText();
+
 function Spielzug() {
   if (textArray[textStelle] === "img") {
     nextBild();
@@ -39,6 +49,10 @@ function Spielzug() {
     textStelle++;
   }
 
+
+  if (textStelle === 1) {
+    starteSpielHinweisText();
+  }
   if (textStelle >= textArray.length) {
     console.log("ende von text");
   }
@@ -193,6 +207,34 @@ function closeMenu() {
   insidemenu.style.zIndex = -5;
 }
 
+function confirmHauptmenu() {
+  closeMenu();
+  menuOpen = true;
+  let menudiv = document.getElementById("menu-div");
+  let text = document.getElementById("text-container");
+  let confirmdiv = document.getElementById("confirm-button-container");
+  menudiv.style.opacity = "90%";
+  text.style.opacity = "30%";
+  menudiv.style.zIndex = 3;
+  confirmdiv.style.display = "block";
+  confirmdiv.innerHTML = `<div id="confirm-buttons">
+      <p> Bist du dir Sicher? Ungespeicheter Fortschritt geht verloren</p>
+      <button class="confirm-button red-button" onclick="confirmHauptmenuZurueck()" id="back">Zurück</button>
+      <button class="confirm-button green-button" onclick="confirmHauptmenuWeiter()" id="hauptmenu">Zum Hauptmenü</button>
+    </div>`
+}
+
+function confirmHauptmenuZurueck() {
+  let confirmdiv = document.getElementById("confirm-button-container");
+  confirmdiv.innerHTML = "";
+  confirmdiv.style.display = "none";
+  closeMenu();
+}
+
+function confirmHauptmenuWeiter() {
+  window.location.href = "../start.html";
+}
+
 function getSpeicherstandAnzeige() {
   //Holt die Speicherstände aus dem Localstorage und zeigt sie an
   let currentAnzeige = document.getElementById("speicherstaende-container-id");
@@ -341,7 +383,6 @@ function updateSlotUmbennenVisual() {
     });
   }
 }
-
 
 function getDate() {
   var date = new Date();

@@ -5,40 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap"rel="stylesheet"/>
     <script src="script.js" defer></script>
+    
   </head>
   <body>
-    <h1>test</h1>
-
-    <div id="menu-div">
-      <!-- In progress, bitte nicht löschen -->
-    </div>
-
+    <div id="menu-div"></div>
     <div id="inside-menu">
-        <div class="speicherstaende-container" id="speicherstaende-container-id">
-          
-        </div>
-
-        <div id="menu-button-div">
-          <button class="menu-button">Zurück zum Main-Menu</button>
-          <button class="menu-button" onclick="willSpeicherstandLadenFunc()" id="trigger-button">Speicherstand laden</button>
-          <button class="menu-button" onclick="willSlotUmbenennenFunc()">Speicherstand umbennen</button>
-          <button class="menu-button" onclick="closeMenu()">Zurück zum Spiel</button>
-        </div>
+      <div class="speicherstaende-container"id="speicherstaende-container-id"></div>
+      <div id="menu-button-div">
+        <button onclick="confirmHauptmenu()" class="menu-button"> Zurück zum Main-Menu</button>
+        <button class="menu-button" onclick="willSpeicherstandLadenFunc()" id="trigger-button">Speicherstand laden</button>
+        <button class="menu-button" onclick="willSlotUmbenennenFunc()">Speicherstand umbennen </button>
+        <button class="menu-button" onclick="closeMenu()">Zurück zum Spiel</button>
+      </div>
     </div>
-
-
-
 
     <div class="fade-container"></div>
     <div id="optionen-container"></div>
 
+    <div id="confirm-button-container"></div>
+
     <div id="text-container">
       <div id="text" class="text"></div>
     </div>
+
+    <p id="spielStartHinweis"></p>
   </body>
 </html>

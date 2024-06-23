@@ -20,6 +20,11 @@ h1 {
     display: none; /* Überschrift ausblenden, falls sie nicht benötigt wird */
 }
 
+#spielStartHinweis{
+    font-family: "Trirong", serif;
+    font-size: 1.2em;
+    padding-left: 10px;
+}
 h3 {
     margin: 0;
     font-size: 1.5em;
@@ -295,3 +300,57 @@ h3 {
 .bounce {
     animation: bounce 1s infinite;
 }
+#confirm-buttons {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9); /* Light background to enhance readability */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow */
+    z-index: 1000; /* Ensure it appears on top of other content */
+    width: 300px; /* Adjust width as needed */
+  }
+  
+  #confirm-buttons p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .confirm-button {
+    width: 130px; /* Equal width for both buttons */
+    padding: 12px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 6px;
+    outline: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .green-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+  
+  .red-button {
+    background-color: #EF5350; /* Red */
+    color: white;
+  }
+  
+  .confirm-button:hover {
+    background-color: #333; /* Darken background color on hover */
+  }
+
+  #confirm-button-container {
+    display:none;
+    background-color: #1007079c;
+    z-index: 5;
+    width: 100vw; /* Viewport width */
+    height: 100vh; /* Viewport height */
+    position: fixed; /* Makes it relative to the viewport */
+    top: 0;
+    left: 0;
+  }
