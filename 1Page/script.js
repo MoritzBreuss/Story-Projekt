@@ -376,7 +376,7 @@ function updateSlotUmbennenVisual() {
   // Updated die Visuals während des umbenennen des Speicherstandes, abhänigig von willSlotUmbenennen
   if (willSlotUmbenennen) {
     document.querySelectorAll(".slot").forEach((slot) => {
-      slot.style.border = "3px solid #e84a5f";
+      slot.style.border = "3px solid #5a0b0b";
       console.log("slot umbennen visual changed ");
     });
   } if (!willSlotUmbenennen) {
