@@ -4,12 +4,16 @@ let menuOpen = false; //für das Menü
 let changingSlotName = false; //für das umbenennen des Speicherstandes
 let willSlotUmbenennen = false; //für das umbenennen des Speicherstandes
 let willSpeicherstandLaden = false; //für das Laden des Speicherstandes
+let musicIsPlaying = false; //für das Musik abspielen
 let textArray = [
   "Hi bbg das ist ein test",
   "das ist der zweite test",
   "img",
   "das ist der dritte test",
+  "startMusic",
   "das ist der vierte testttttttttttt tttttttttttttttt tttttttttttttttttttttttt ttttttttttttttttttttttttttttttttttttttttttt",
+  "stopMusic",
+  "das ist der fünfte test",
   "opt",
 ];
 let text1A = [
@@ -28,6 +32,7 @@ let text1B = [
 let textStelle = 0;
 let bildStelle = 0;
 let optionenStelle = 0;
+let musicStelle = 0;
 
 function starteSpielHinweisText() {
   let text = document.getElementById("spielStartHinweis")
@@ -44,6 +49,11 @@ function Spielzug() {
     nextBild();
   } else if (textArray[textStelle] === "opt") {
     optionenErstellen();
+  } else if (textArray[textStelle] === "startMusic") {
+    playMusic();
+
+  } else if (textArray[textStelle] === "stopMusic") {
+    stopMusic();
   } else {
     nextText();
     textStelle++;
@@ -123,6 +133,26 @@ function showCurrentBild() {
   //nur für den Bildwechsel bei Speicherständen verwenden!!!! sonst nextbild verwenden
   document.body.style.backgroundImage =
     "url('picture1/img" + bildStelle + ".jpg')";
+}
+
+function playMusic() {
+  let body = document.body;
+  body.innerHTML += `<audio id="startAudio" class="audio" autoplay> <source src="music/music` + musicStelle +  `.mp3" type="audio/mpeg">
+  </audio>`
+  musicStelle++;
+  textStelle++;
+  console.log("music playing");
+  Spielzug();
+}
+
+function stopMusic() {
+  let audio = document.getElementById("startAudio");
+  audio.pause();
+  audio.currentTime = 0;
+  console.log("music stopped");
+  textStelle++;
+  Spielzug();
+
 }
 
 function optionenErstellen() {
@@ -383,6 +413,7 @@ function updateSlotUmbennenVisual() {
     document.querySelectorAll(".slot").forEach((slot) => {
       slot.style.border = "3px solid #e84a5f";
       console.log("slot umbennen visual changed ");
+      setSpeicherstandAnzeige();
     });
   }
 }
