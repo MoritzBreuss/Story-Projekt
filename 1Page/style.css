@@ -185,15 +185,18 @@ h3 {
     margin: 20px auto 100px auto; /* Adjusted margin to move up */
     padding: 20px;
     margin-bottom: 50px;
-    background-color: #34495e;
+    background-color: #fecea8;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgb(155, 76, 23);
 }
 
 .speicherstaende-container h3 {
     text-align: center;
-    color: #ecf0f1;
+    color: #ffffffd8;
+    text-shadow: 2px 2px 3px rgba(128, 110, 110, 0.445);
     margin-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 33px;
 }
 
 .speicherstaende {
@@ -204,8 +207,8 @@ h3 {
 }
 
 .speicherstaende .slot {
-    background-color: #1abc9c;
-    border: 3px solid #13c19e;
+    background-color: #ff857cd8;
+    border: 3px solid #e84a5f;
     border-radius: 10px;
     padding: 10px;
     text-align: center;
@@ -214,8 +217,8 @@ h3 {
 }
 
 .speicherstaende .slot:hover {
-    background-color: #16a085;
-    border-color: #1abc9c;
+    background-color: #c99c78;
+    border-color: #bc481a;
     transform: translateY(-5px);
 }
 
@@ -241,9 +244,9 @@ h3 {
 
 
 .menu-button {
-    background-color: #1abc9c;
+    background-color: #ff857cd8;
+    border: 3px solid #e84a5f;;
     color: #ecf0f1;
-    border: 3px solid #16a085;
     border-radius: 10px;
     padding: 5px 7px;
     font-size: 1em; /* Smaller font size */
@@ -254,8 +257,8 @@ h3 {
 }
 
 .menu-button:hover {
-    background-color: #16a085;
-    border-color: #1abc9c;
+    background-color: #17966cb7;
+    border-color: #17966c9d;;
     transform: translateY(-5px);
 }
 .slot-input {

@@ -286,6 +286,9 @@ function willSpeicherstandLadenFunc() {
 }
 
 function speicherStandLaden(element) {
+  if (isTyping == true) {   //verhindert das Laden des Speicherstandes wenn der Text noch getippt wird
+    return false;
+  }
   //Lädt den Speicherstand aus dem localstorage und setzt die Werte für den Spielzug macht isTyping false und benutzt ShowCurrentBild
   let speicherstandArray = JSON.parse(
     localStorage.getItem("SpeicherstandArray")
@@ -296,7 +299,7 @@ function speicherStandLaden(element) {
     }
   });
   isTyping = false;
-  textStelle = filteredSpeicherstand[0].speicherTextStelle - 1;
+  textStelle = filteredSpeicherstand[0].speicherTextStelle - 1;     //nimmt die Werte aus dem Speicherstandarray und setzt sie im spiel um den Speicherstand 
   bildStelle = filteredSpeicherstand[0].speicherBildStelle;
   optionenStelle = filteredSpeicherstand[0].speicherOptionenStelle;
   closeMenu();
@@ -373,12 +376,12 @@ function updateSlotUmbennenVisual() {
   // Updated die Visuals während des umbenennen des Speicherstandes, abhänigig von willSlotUmbenennen
   if (willSlotUmbenennen) {
     document.querySelectorAll(".slot").forEach((slot) => {
-      slot.style.border = "3px solid #5a0b0b";
+      slot.style.border = "3px solid #e84a5f";
       console.log("slot umbennen visual changed ");
     });
   } if (!willSlotUmbenennen) {
     document.querySelectorAll(".slot").forEach((slot) => {
-      slot.style.border = "3px solid #1abc9c";
+      slot.style.border = "3px solid #e84a5f";
       console.log("slot umbennen visual changed ");
     });
   }
