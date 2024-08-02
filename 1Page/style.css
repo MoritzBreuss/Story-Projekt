@@ -357,3 +357,7 @@ h3 {
     top: 0;
     left: 0;
   }
+
+  #confirm-button-container-text {
+    color:#100707;
+  }

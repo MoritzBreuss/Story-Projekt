@@ -45,19 +45,24 @@ function starteSpielHinweisText() {
 starteSpielHinweisText();
 
 function Spielzug() {
-  if (textArray[textStelle] === "img") {
+  switch(textArray[textStelle]) {
+    case "img": 
     nextBild();
-  } else if (textArray[textStelle] === "opt") {
-    optionenErstellen();
-  } else if (textArray[textStelle] === "startMusic") {
-    playMusic();
-
-  } else if (textArray[textStelle] === "stopMusic") {
-    stopMusic();
-  } else {
-    nextText();
-    textStelle++;
+    break;
+    case "opt":
+      optionenErstellen();
+    break;
+    case "startMusic":
+      playMusic();
+    break;
+    case "stopMusic":
+      stopMusic();
+    break;
+    default:
+      nextText();
+      textStelle++;
   }
+    
 
 
   if (textStelle === 1) {
@@ -70,54 +75,50 @@ function Spielzug() {
   if (!localStorage.getItem("SpeicherstandArray")) {
     //Wenn es noch keine Speicherstände gibt, wird es erstellt
     localStorage.setItem("SpeicherstandArray", JSON.stringify([]));
-  }
-  if (!localStorage.getItem("SpeicherstandAnzeige")) {
-    //Wenn es noch keine Speicherstandanzeige für das Menü gibt, wird es erstellt
     localStorage.setItem(
       "SpeicherstandAnzeige",
       `<h3>Deine Speicherstände</h3>
           <div class="speicherstaende">
             <div onclick="slotButtonClicked(event)" id="slot1" class="slot">
                 <div class="slot-number">Leerer Slot</div>
-                <div class="slot-date">Datum: 2024-06-22</div>
+                <div class="slot-date">Datum: ---</div>
               </div>
               <div onclick="slotButtonClicked(event)" id="slot2" class="slot">
                 <div class="slot-number">Leerer Slot</div>
-                <div class="slot-date">Datum: 2024-06-21</div>
+                <div class="slot-date">Datum: ---</div>
               </div>
               <div onclick="slotButtonClicked(event)" id="slot3" class="slot">
                 <div class="slot-number">Leerer Slot</div>
-                <div class="slot-date">Datum: 2024-06-23</div>
+                <div class="slot-date">Datum: ---</div>
               </div>
               <div onclick="slotButtonClicked(event)" id="slot4" class="slot">
                 <div class="slot-number">Leerer Slot</div>
-                <div class="slot-date">Datum: 2024-06-24</div>
+                <div class="slot-date">Datum: ---</div>
               </div>
               <div onclick="slotButtonClicked(event)" id="slot5" class="slot">
                 <div class="slot-number">Leerer Slot</div>
-                <div class="slot-date">Datum: 2024-06-25</div>
+                <div class="slot-date">Datum: ---</div>
               </div>
               <div onclick="slotButtonClicked(event)" id="slot6" class="slot">
                 <div class="slot-number">Leerer Slot</div>
-                <div class="slot-date">Datum: 2024-06-26</div>
+                <div class="slot-date">Datum: ---</div>
               </div>
               <div onclick="slotButtonClicked(event)" id="slot7" class="slot">
                 <div class="slot-number">Leerer Slot</div>
-                <div class="slot-date">Datum: 2024-06-27</div>
+                <div class="slot-date">Datum: ---</div>
               </div>
               <div onclick="slotButtonClicked(event)" id="slot8" class="slot">
                 <div class="slot-number">Leerer Slot</div>
-                <div class="slot-date">Datum: 2024-06-26</div>
+                <div class="slot-date">Datum: ---</div>
               </div>
               <div onclick="slotButtonClicked(event)" id="slot9" class="slot">
                 <div class="slot-number">Leerer Slot</div>
-                <div class="slot-date">Datum: 2024-06-27</div>
+                <div class="slot-date">Datum: ---</div>
               </div>
-            
-
           </div>`
     );
   }
+
 }
 
 function nextBild() {
@@ -248,7 +249,7 @@ function confirmHauptmenu() {
   menudiv.style.zIndex = 3;
   confirmdiv.style.display = "block";
   confirmdiv.innerHTML = `<div id="confirm-buttons">
-      <p> Bist du dir Sicher? Ungespeicheter Fortschritt geht verloren</p>
+      <p id="confirm-button-container-text"> Bist du dir Sicher? Ungespeicheter Fortschritt geht verloren</p>
       <button class="confirm-button red-button" onclick="confirmHauptmenuZurueck()" id="back">Zurück</button>
       <button class="confirm-button green-button" onclick="confirmHauptmenuWeiter()" id="hauptmenu">Zum Hauptmenü</button>
     </div>`
@@ -332,6 +333,7 @@ function speicherStandLaden(element) {
   textStelle = filteredSpeicherstand[0].speicherTextStelle - 1;     //nimmt die Werte aus dem Speicherstandarray und setzt sie im spiel um den Speicherstand 
   bildStelle = filteredSpeicherstand[0].speicherBildStelle;
   optionenStelle = filteredSpeicherstand[0].speicherOptionenStelle;
+  musicStelle = filteredSpeicherstand[0].speicherMusicStelle;
   closeMenu();
   Spielzug();
   showCurrentBild();
@@ -364,6 +366,7 @@ function speicherstandSpeichern(element) {
     speicherTextStelle: textStelle,
     speicherBildStelle: bildStelle,
     speicherOptionenStelle: optionenStelle,
+    speicherMusicStelle: musicStelle,
     speicherTextArray: textArray,
   };
   console.log(speicherstand + "wurde gespeichert");
