@@ -8,6 +8,9 @@ let musicIsPlaying = false; //für das Musik abspielen
 let textArray = [
   "Hi bbg das ist ein test",
   "das ist der zweite test",
+  "Sandra: ich liebe es zu Schlafen",
+  "Das ist verständlich nicht?",
+  "Peter: Ja da stimme ich dir zu!",
   "img",
   "das ist der dritte test",
   "startMusic",
@@ -34,6 +37,80 @@ let bildStelle = 0;
 let optionenStelle = 0;
 let musicStelle = 0;
 
+class Character {
+  constructor(){
+    this.characterListe = [
+      {
+        name: "Kevin",
+        color: "rgb(136, 2, 114)"},
+      {
+        name: "Sandra",
+        color: "rgb(2, 11, 136)"},
+      {
+        name: "Peter",
+        color: "rgb(135, 9, 9)"
+      },
+      {
+        name: "Moritz",
+        color: "rgb(80, 11, 136)"
+      },
+    ]
+  }
+
+  checkIfCharacter(text){
+    let firstWord = text.split(" ")[0];
+    firstWord = firstWord.slice(0, -1);
+    const findName = this.characterListe.find((element) => {
+      return element.name == firstWord;
+    })
+    return typeof findName === "object" ? true : false;
+  }
+
+  changeVisualforCharacter(text){
+    let firstWord = text.split(" ")[0];
+    firstWord = firstWord.slice(0, -1);
+    let charNameText = document.getElementById("charNameText");
+    charNameText.innerHTML = firstWord;
+    let charNameBox = document.getElementById("namen-square");
+    let textContainer = document.getElementById("text-container")
+
+
+    const findName = this.characterListe.find((element) => {
+      return element.name == firstWord;
+    })
+    if (findName) {
+      let currentColor = findName.color;
+      //** Now changing the visuals including border and box color/visibility */
+      charNameBox.style.visibility = `visible`;
+      charNameBox.style.backgroundColor = `${currentColor}`;
+      textContainer.style.borderColor = `${currentColor}`;
+      console.log("Visuals für den Redenden Character erfolgreich geändert")
+      this.cutNamefromText(text);
+  } else {
+      console.error(`Character with name ${firstWord} not found.`);
+  }
+  }
+
+  cutNamefromText(text){
+   let targetText = textArray[textStelle];
+    targetText = targetText.split(' ').slice(1).join(' ');
+    textArray[textStelle] = targetText;
+  }
+
+  notChartalking(){   // Removes the visuals of a character talking, gets executed everytime a chracter inst talking
+    let charNameText = document.getElementById("charNameText");
+    let charNameBox = document.getElementById("namen-square");
+    let textContainer = document.getElementById("text-container")
+
+    charNameBox.style.visibility = `hidden`;
+    textContainer.style.borderColor = `rgba(136, 2, 114, 0)`
+    console.log("Character talking visuals removed")
+  }
+
+}
+
+const characterClass = new Character; 
+
 function starteSpielHinweisText() {
   let text = document.getElementById("spielStartHinweis")
   if (textStelle === 0) {
@@ -59,10 +136,13 @@ function Spielzug() {
       stopMusic();
     break;
     default:
+      if(characterClass.checkIfCharacter(textArray[textStelle])){       //* für wenn Charaktere Sprechen
+        characterClass.changeVisualforCharacter(textArray[textStelle]);
+      } else {characterClass.notChartalking();}         //* Charactere Ende
       nextText();
       textStelle++;
   }
-    
+
 
 
   if (textStelle === 1) {
