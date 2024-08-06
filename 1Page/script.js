@@ -201,14 +201,26 @@ function Spielzug() {
 
 }
 
-function nextBild() {
-  document.body.style.backgroundImage =
-    "url('picture1/img" + bildStelle + ".jpg')";
-  bildStelle++;
+
+function nextBild() {     //chatgbt hat den fade effekt geschrieben(den rest ich) weil absoulut nix gefunden wie man das macht 
+  const background = document.getElementById("background");
   textStelle++;
-  console.log(bildStelle + "Bild changing success");
   Spielzug();
+  // Apply the fade-out class to trigger the fade-out effect
+  background.offsetHeight; // This forces the browser to recognize the style change immediately
+  background.classList.add("fade-out");
+
+  // Wait for the fade-out effect to complete before changing the image
+  setTimeout(() => {
+      background.style.backgroundImage = "url('picture1/img" + bildStelle + ".jpg')";
+      bildStelle++;
+
+      // Remove the fade-out class to allow fade-in
+      background.classList.remove("fade-out");
+      console.log("bildstelle:" + bildStelle + " Bild changing success");
+  }, 1000); // Matches the duration of the CSS transition
 }
+
 
 function showCurrentBild() {
   //nur für den Bildwechsel bei Speicherständen verwenden!!!! sonst nextbild verwenden
@@ -282,8 +294,8 @@ function nextText() {
     //Funktion für die Animation des Textes, checkes ob Istyping true ist und sobald es fertig ist macht es isTyping false
     if (i < text.length && isTyping) {
       document.getElementById("text").innerHTML += text.charAt(i);
-      setTimeout(smoothTextAnzeige, 70);
       i++;
+      setTimeout(smoothTextAnzeige, 70);
     } else {
       isTyping = false;
     }

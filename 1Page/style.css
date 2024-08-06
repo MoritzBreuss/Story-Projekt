@@ -2,8 +2,6 @@
 
 body {
     background: url('picture1/backround.png') no-repeat center center fixed;
-    -webkit-transition: background-image 5s; /* Add transition effect for the background image */
-    transition: background-image 5s; /* Ensure compatibility with all browsers */
     background-size: cover; /* Hintergrundbild auf Bildschirmgröße skalieren */
     margin: 0;
     font-family: 'Arial', sans-serif; /* Klare, lesbare Schriftart */
@@ -18,6 +16,21 @@ body {
 
 h1 {
     display: none; /* Überschrift ausblenden, falls sie nicht benötigt wird */
+}
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 1.5s ease-in-out;
+    opacity: 1;
+}
+
+#background.fade-out {
+    opacity: 0;
 }
 
 #spielStartHinweis{
