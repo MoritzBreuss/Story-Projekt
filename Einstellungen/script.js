@@ -18,6 +18,25 @@ modeToggle.addEventListener('click', () => {
     }
 });
 
+function changeMusicVolume(){
+    let givenMusicVolume = document.getElementById('musicVolumeGiven').value;
+    if(givenMusicVolume < 0 || givenMusicVolume > 100 || !givenMusicVolume){
+        alert('Please enter a value between 1 and 100.');
+        return;
+    }
+    localStorage.setItem("musicVolume", givenMusicVolume)
+    console.log(localStorage.getItem("musicVolume") + "set")
+}
+
+function changeWritingSpeed(){
+    let givenWrtitingSpeed = document.getElementById('writingSpeedGiven').value;
+    if(givenWrtitingSpeed < 1 || givenWrtitingSpeed > 100 || !givenWrtitingSpeed){
+        alert('Please enter a value between 1 and 100.');
+        return;
+    }
+    localStorage.setItem("writingSpeed", givenWrtitingSpeed)
+    console.log(localStorage.getItem("writingSpeed") + "set")
+}
 function changeFontSize() {
     var fontSizeInput = document.getElementById('fontSize');
     var fontSize = parseInt(fontSizeInput.value, 10);

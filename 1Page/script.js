@@ -4,7 +4,7 @@ let menuOpen = false; //für das Menü
 let changingSlotName = false; //für das umbenennen des Speicherstandes
 let willSlotUmbenennen = false; //für das umbenennen des Speicherstandes
 let willSpeicherstandLaden = false; //für das Laden des Speicherstandes
-let musicIsPlaying = false; //für das Musik abspielen
+let musicIsPlaying = false; //für das Musik abspielen //für die Schreibgeschwindigkeit
 let textArray = [
   "Hi bbg das ist ein test",
   "das ist der zweite test",
@@ -36,6 +36,72 @@ let textStelle = 0;
 let bildStelle = 0;
 let optionenStelle = 0;
 let musicStelle = 0;
+
+
+class einstellungen {
+  constructor(){
+    this.localListner();
+  }
+  localListner(){
+    window.addEventListener("storage", (event) => {this.whichLocalchange(event)});
+  }
+     //wird direkt ausgeführt wenn sich der Localstorage ändert für Fontsize und Darkmode
+    //wird direkt a "fontSize") {
+      //Fontsize Einusgeführt wenn sich der Localstorage ändert für Fontsize und Darkmode
+      whichLocalchange(event){
+    if (event.key == "fontSize") {
+      this.changeFontSize();
+    }
+    if (event.key == "dark-mode") {
+      //Für Darkmode Einstellungen
+      this.changeDarkmode();}
+      if(event.key == "writingSpeed"){
+        console.log("local S change detected");
+        this.changeWritingSpeed();
+      }
+      if (event.key == "musicVolume") {
+        console.log("local music volume change detected");
+        this.changeMusicVolume();
+      }
+    }
+  
+    changeMusicVolume(){
+      let musicVolume = localStorage.getItem("musicVolume");
+      parseInt(musicVolume) * 0.01;
+      return musicVolume;
+    }
+  
+    changeDarkmode() {
+      if (localStorage.getItem("dark-mode") === "true") {
+        //Settet den Darkmode und Fontsize beim Start, auch ohne localStorage change
+        console.log("darkmode");
+        var element = document.body;
+        element.classList.add("dark-mode");
+        document.getElementById("text-container").classList.add("dark-mode");
+      } else {
+        console.log("hellmode");
+        var element = document.body;
+        element.classList.remove("dark-mode");
+        document.getElementById("text-container").classList.remove("dark-mode");
+      }
+    }
+    
+    changeFontSize() {
+      let fontSize = localStorage.getItem("fontSize");
+      if (fontSize) {
+        document.getElementById("text-container").style.fontSize = fontSize + "px";
+        console.log("Fontsize changed");
+      }
+    }
+    
+     changeWritingSpeed(){
+      console.log("writing speed changed");
+    let wantedWritingSpeed = localStorage.getItem("writingSpeed")
+    parseInt(wantedWritingSpeed) * 100;
+    return wantedWritingSpeed;
+    }
+  }
+let einstellungInstance = new einstellungen;
 
 class Character {
   constructor(){
@@ -120,6 +186,7 @@ function starteSpielHinweisText() {
   }
 }
 starteSpielHinweisText();
+einstellungInstance.changeWritingSpeed(); //wichtig damit writingspeed aus dem Localstorage genommen wird und definiert wird bevor man es benutzt
 
 function Spielzug() {
   switch(textArray[textStelle]) {
@@ -219,7 +286,11 @@ function showCurrentBild() {
 function playMusic() {
   let body = document.body;
   body.innerHTML += `<audio id="startAudio" class="audio" autoplay> <source src="music/music` + musicStelle +  `.mp3" type="audio/mpeg">
-  </audio>`
+  </audio>`;
+  let audioElements = document.getElementsByClassName('audio');
+  Array.from(audioElements).forEach(element => {
+   
+  });
   musicStelle++;
   textStelle++;
   console.log("music playing");
@@ -280,9 +351,10 @@ function nextText() {
 
   function smoothTextAnzeige() {
     //Funktion für die Animation des Textes, checkes ob Istyping true ist und sobald es fertig ist macht es isTyping false
+    let wantedWritingSpeed = einstellungInstance.changeWritingSpeed();
     if (i < text.length && isTyping) {
       document.getElementById("text").innerHTML += text.charAt(i);
-      setTimeout(smoothTextAnzeige, 70);
+      setTimeout(smoothTextAnzeige, wantedWritingSpeed);
       i++;
     } else {
       isTyping = false;
@@ -513,44 +585,9 @@ function getDate() {
   );
 }
 
-function changeDarkmode() {
-  if (localStorage.getItem("dark-mode") === "true") {
-    //Settet den Darkmode und Fontsize beim Start, auch ohne localStorage change
-    console.log("darkmode");
-    var element = document.body;
-    element.classList.add("dark-mode");
-    document.getElementById("text-container").classList.add("dark-mode");
-  } else {
-    console.log("hellmode");
-    var element = document.body;
-    element.classList.remove("dark-mode");
-    document.getElementById("text-container").classList.remove("dark-mode");
-  }
-}
-changeDarkmode(); //Darkmode Einstellen beim Start
-
-function changeFontSize() {
-  let fontSize = localStorage.getItem("fontSize");
-  if (fontSize) {
-    document.getElementById("text-container").style.fontSize = fontSize + "px";
-    console.log("Fontsize changed");
-  }
-}
-changeFontSize(); //Fontsize Einstellen beim Start
-
-window.addEventListener("storage", (event) => {   //wird direkt ausgeführt wenn sich der Localstorage ändert für Fontsize und Darkmode
-  //wird direkt ausgeführt wenn sich der Localstorage ändert für Fontsize und Darkmode
-  if (event.key == "fontSize") {
-    //Fontsize Einstellen mit Localstorage
-    changeFontSize();
-  }
-  if (event.key == "dark-mode") {
-    //Für Darkmode Einstellungen
-    changeDarkmode();
-  }
-});
-
-
+einstellungInstance.changeMusicVolume();
+einstellungInstance.changeWritingSpeed();
+einstellungInstance.changeFontSize();
 onkeydown = function (event) {
   //öffnet und schließt das Menü mit Escape
   if (event.code === "Escape") {
