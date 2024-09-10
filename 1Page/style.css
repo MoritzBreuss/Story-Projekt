@@ -57,7 +57,7 @@ h3 {
         width: 80px;
         height: 40px; /* Adjust height as needed to match the box size */
         background-color: white; /* Background color of the square */
-        color: black; /* Text color */
+        color: rgb(198, 198, 198); /* Text color */
         display: flex;
         align-items: center;
         justify-content: center; /* Center the text horizontally */

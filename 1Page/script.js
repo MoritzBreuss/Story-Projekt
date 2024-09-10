@@ -41,6 +41,7 @@ let musicStelle = 0;
 class einstellungen {
   constructor(){
     this.localListner();
+    this.changeMusicVolume();
   }
   localListner(){
     window.addEventListener("storage", (event) => {this.whichLocalchange(event)});
@@ -68,6 +69,9 @@ class einstellungen {
     changeMusicVolume(){
       let musicVolume = localStorage.getItem("musicVolume");
       parseInt(musicVolume) * 0.01;
+      if (localStorage.getItem("musicVolume") == null) {    //wenn noch nicht im localstorage gespeichert trotsdem etwas returnen
+       return 0.9;
+      }
       return musicVolume;
     }
   
@@ -97,7 +101,7 @@ class einstellungen {
      changeWritingSpeed(){
       console.log("writing speed changed");
     let wantedWritingSpeed = localStorage.getItem("writingSpeed")
-    parseInt(wantedWritingSpeed) * 100;
+    wantedWritingSpeed = wantedWritingSpeed * 7;
     return wantedWritingSpeed;
     }
   }
@@ -174,7 +178,6 @@ class Character {
   }
 
 }
-
 const characterClass = new Character; 
 
 function starteSpielHinweisText() {
@@ -288,9 +291,12 @@ function playMusic() {
   body.innerHTML += `<audio id="startAudio" class="audio" autoplay> <source src="music/music` + musicStelle +  `.mp3" type="audio/mpeg">
   </audio>`;
   let audioElements = document.getElementsByClassName('audio');
+  let musicVolume = einstellungInstance.changeMusicVolume();
   Array.from(audioElements).forEach(element => {
-   
+    element.volume = musicVolume * 0.01;    // mal 0.01 weil die Lautstärke von 0 bis 1 geht - Proznetsatz
+
   });
+  console.log("msucivolume changed");
   musicStelle++;
   textStelle++;
   console.log("music playing");
