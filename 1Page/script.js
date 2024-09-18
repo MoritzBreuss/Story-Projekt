@@ -17,6 +17,8 @@ let textArray = [
   "das ist der vierte testttttttttttt tttttttttttttttt tttttttttttttttttttttttt ttttttttttttttttttttttttttttttttttttttttttt",
   "stopMusic",
   "das ist der fünfte test",
+  "img",
+  "Anton: Ich liebe es zu wixxen",
   "opt",
 ];
 let text1A = [
@@ -36,7 +38,6 @@ let textStelle = 0;
 let bildStelle = 0;
 let optionenStelle = 0;
 let musicStelle = 0;
-
 
 class einstellungen {
   constructor(){
@@ -124,6 +125,10 @@ class Character {
         name: "Moritz",
         color: "rgb(80, 11, 136)"
       },
+      {
+        name: "Anton",
+        color: "rgb(136, 2, 2)"
+      }
     ]
   }
 
@@ -222,8 +227,8 @@ function Spielzug() {
     console.log("ende von text");
   }
 
-  if (!localStorage.getItem("SpeicherstandArray")) {
-    //Wenn es noch keine Speicherstände gibt, wird es erstellt
+  if (!localStorage.getItem("SpeicherstandArray")) {      //Wenn es noch keine Speicherstände gibt, wird es erstellt
+
     localStorage.setItem("SpeicherstandArray", JSON.stringify([]));
     localStorage.setItem(
       "SpeicherstandAnzeige",
@@ -386,6 +391,7 @@ function openMenu() {
 function closeMenu() {
   //closed das menü
   menuOpen = false;
+  willSpeicherstandLaden = false;
   let menudiv = document.getElementById("menu-div");
   let text = document.getElementById("text-container");
   let insidemenu = document.getElementById("inside-menu");
@@ -489,9 +495,10 @@ function speicherStandLaden(element) {
   });
   isTyping = false;
   textStelle = filteredSpeicherstand[0].speicherTextStelle - 1;     //nimmt die Werte aus dem Speicherstandarray und setzt sie im spiel um den Speicherstand 
-  bildStelle = filteredSpeicherstand[0].speicherBildStelle;
+  bildStelle = filteredSpeicherstand[0].speicherBildStelle - 1;
   optionenStelle = filteredSpeicherstand[0].speicherOptionenStelle;
   musicStelle = filteredSpeicherstand[0].speicherMusicStelle;
+  textArray = filteredSpeicherstand[0].speicherTextArray;
   closeMenu();
   Spielzug();
   showCurrentBild();
